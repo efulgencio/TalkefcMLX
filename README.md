@@ -17,6 +17,7 @@ Este proyecto es una referencia técnica diseñada para desarrolladores interesa
     * [Utilities (Audio Manager)](#utilities)
     * [View (SwiftUI)](#view)
     * [Translate (Inferencia de IA)](#translate)
+7. [Información adicional](#información-adicional)
 
 ## Objetivo
 
@@ -82,16 +83,11 @@ Interfaz reactiva construida en **SwiftUI**:
 ### Translate
 
 Lógica principal en la clase **TranslaterManager** (`@Observable` y `@MainActor`):
-* **Modelos Disponibles:** Selección dinámica entre `Llama 3.2 1B`, `Qwen 2.5 1.5B` y `Mistral 7B` a través de `TypeModelOption`.
-* **Prompt Engineering:**
-    * Implementación de **System Prompts** para definir el rol de traductor profesional.
-    * Uso de **Few-Shot Prompting** (ejemplos Usuario/Asistente) para estabilizar el comportamiento de modelos pequeños y evitar que deriven a modo conversacional.
-* **Configuración de Generación:**
-    * `temperature: 0.0` para garantizar traducciones deterministas y precisas.
-    * `repetitionPenalty: 1.1` para mejorar la fluidez del texto generado.
-    * Actualización de `englishText` mediante streaming de tokens.
 
----
-
-> [!NOTE]
-> *Este proyecto es un ejemplo educativo. Se recomienda el uso de modelos de 1B o 1.5B para dispositivos iOS con limitaciones de RAM.*
+* **Modelos Disponibles:** Selección dinámica a través del siguiente enumerado:
+```swift
+enum TypeModelOption: String, CaseIterable {
+    case optionA = "mlx-community/Llama-3.2-1B-Instruct-4bit"
+    case optionB = "mlx-community/Qwen2.5-1.5B-Instruct-4bit"
+    case optionC = "mlx-community/Mistral-7B-Instruct-v0.3-4bit"
+}
