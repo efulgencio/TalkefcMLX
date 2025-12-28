@@ -47,7 +47,7 @@ Sigue estos pasos para configurar el proyecto en tu entorno de desarrollo:
 
 1.  **Crea el proyecto** (Cómo supported destination además de iPhone tambíen incluye Mac)
 2.  **Añade las dependencias**
-3.  **Añade las clases que están incluidas en este repositorio**
+3.  **Añade las clases que están incluidas en este repositorio** ContentView.swift, TranslaterManager.swift, SpeechManager.swift.
 
    ![Captura de pantalla de la aplicación TalkefcMLX](SupportedDestinations.png)
 
