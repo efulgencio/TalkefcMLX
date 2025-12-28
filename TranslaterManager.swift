@@ -57,7 +57,6 @@ class TranslaterManager {
             
             self.isDownloading = false
             
-            // Refinamos el prompt para forzar la respuesta del asistente
             let prompt = """
             <|begin_of_text|><|start_header_id|>system<|end_header_id|>
             \(systemInstruction)<|eot_id|>
@@ -78,7 +77,6 @@ class TranslaterManager {
                     if let lastToken = tokens.last {
                         let text = context.tokenizer.decode(tokens: [lastToken])
                         Task { @MainActor in
-                            // Corregido: 'englishText' en lugar de 'textoIngles'
                             self.englishText += text
                         }
                     }
