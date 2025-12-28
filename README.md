@@ -2,6 +2,8 @@
 
 Ejemplo de implementación de **MLX de Apple** para la inferencia local de Modelos de Lenguaje (LLMs) en dispositivos con Apple Silicon.
 
+![Captura de pantalla de la aplicación TalkefcMLX](ScreenShoot.png)
+
 Este proyecto es una referencia técnica diseñada para desarrolladores interesados en el despliegue de IA generativa de forma nativa. Demuestra cómo integrar modelos locales con una interfaz fluida en SwiftUI y un sistema de síntesis de voz optimizado para evitar bloqueos y warnings de concurrencia.
 
 ## Índice
@@ -34,6 +36,8 @@ El propósito es proporcionar una base funcional sobre el uso de **MLX Swift**, 
 
 ## Dependencias (Packages)
 Importar mediante Swift Package Manager (SPM):
+
+![Dependencias de Swift Package Manager en Xcode](PackageDependencies.png)
 
 * **MLX Swift:** El núcleo del framework.
   `https://github.com/ml-explore/mlx-swift`
