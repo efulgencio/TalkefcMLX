@@ -6,6 +6,8 @@ Ejemplo de implementación de **MLX de Apple** para la inferencia local de Model
 
 Este proyecto es una referencia técnica diseñada para desarrolladores interesados en el despliegue de IA generativa de forma nativa. Demuestra cómo integrar modelos locales con una interfaz fluida en SwiftUI y un sistema de síntesis de voz optimizado para evitar bloqueos y warnings de concurrencia.
 
+---
+
 ## Índice
 
 1. [Objetivo](#objetivo)
@@ -18,6 +20,8 @@ Este proyecto es una referencia técnica diseñada para desarrolladores interesa
     * [View (SwiftUI)](#view)
     * [Translate (Inferencia de IA)](#translate)
 7. [Información adicional](#información-adicional)
+
+---
 
 ## Objetivo
 
@@ -36,8 +40,8 @@ El propósito es proporcionar una base funcional sobre el uso de **MLX Swift**, 
 
 Sigue estos pasos para configurar el entorno:
 
-1.  **Crea el proyecto:** En Xcode, asegúrate de incluir **Mac** además de **iPhone** en las *Supported Destinations*.
-2.  **Añade las dependencias:** Utiliza Swift Package Manager para importar las librerías de MLX (ver sección [Dependencias](#dependencias-packages)).
+1.  **Crea el proyecto:** En Xcode, añade **Mac** además de **iPhone** en las *Supported Destinations*.
+2.  **Añade las dependencias:** Utiliza Swift Package Manager para importar las librerías de MLX.
 3.  **Añade las clases del repositorio:** Importa los siguientes archivos a tu proyecto:
     * `ContentView.swift`
     * `TranslaterManager.swift`
@@ -56,38 +60,49 @@ Importar mediante Swift Package Manager (SPM):
 
 ![Dependencias de Swift Package Manager en Xcode](PackageDependencies.png)
 
-* **MLX Swift:** El núcleo del framework.  
-    `https://github.com/ml-explore/mlx-swift`
-* **MLX Swift Chat:** Librería de alto nivel para generación de texto.  
-    `https://github.com/ml-explore/mlx-swift-chat`
+* **MLX Swift:** `https://github.com/ml-explore/mlx-swift`
+* **MLX Swift Chat:** `https://github.com/ml-explore/mlx-swift-chat`
+
+---
 
 ## Estructura del Código
 
 <a name="utilities"></a>
 ### Utilities
-
-* **SpeechManager:** Clase final marcada como `@unchecked Sendable` para gestionar `AVSpeechSynthesizer`.
-    * Utiliza una **DispatchQueue** serie con `qos: .background` para delegar el procesamiento de audio fuera del hilo principal, eliminando avisos de *Priority Inversion*.
-    * El método `toTalk(texto:)` filtra voces británicas mejoradas (`en-GB`) de alta calidad.
-    * Gestiona la interrupción inmediata de la voz si se solicita una nueva traducción.
+* **SpeechManager:** Gestiona `AVSpeechSynthesizer` en una `DispatchQueue` serie de fondo para evitar bloqueos en el hilo principal. Utiliza voces de alta calidad `en-GB`.
 
 <a name="view"></a>
 ### View
-
-Interfaz reactiva construida en **SwiftUI**:
-* **Input:** `TextEditor` para la captura de texto en español.
-* **Gestión de Carga:** Estados diferenciados `isLoading` e `isDownloading` para mostrar el progreso de descarga de pesos del modelo de forma precisa.
-* **Scroll Nativo:** Uso de `ScrollView` para evitar el truncado de respuestas largas, permitiendo la lectura completa de traducciones y notas del modelo.
+* **SwiftUI:** Interfaz reactiva con estados `isLoading` e `isDownloading` para gestionar el feedback visual durante la carga de pesos y la generación de texto.
 
 <a name="translate"></a>
 ### Translate
+* **TranslaterManager:** Lógica de inferencia con **Prompt Engineering** (System Prompts y Few-Shot) y configuración determinista (`temperature: 0.0`) para asegurar traducciones precisas.
 
-Lógica principal en la clase **TranslaterManager** (`@Observable` y `@MainActor`):
+---
 
-* **Modelos Disponibles:** Selección dinámica a través del siguiente enumerado:
-```swift
+### Información adicional
+
+Para la gestión de modelos, el proyecto utiliza un enumerado que apunta a repositorios específicos de la comunidad MLX en Hugging Face. Esto permite alternar fácilmente entre diferentes arquitecturas de LLM:
+
+
+<pre><code>
 enum TypeModelOption: String, CaseIterable {
     case optionA = "mlx-community/Llama-3.2-1B-Instruct-4bit"
     case optionB = "mlx-community/Qwen2.5-1.5B-Instruct-4bit"
     case optionC = "mlx-community/Mistral-7B-Instruct-v0.3-4bit"
 }
+</code></pre>
+
+### Detalles de los Modelos Soportados
+
+* **Llama 3.2 1B (Meta):** Es el modelo más ligero y veloz. Gracias a su tamaño reducido, genera tokens de forma casi instantánea y consume muy poca batería, siendo la opción ideal para iPhones con hardware base.
+* **Qwen 2.5 1.5B (Alibaba):** Ofrece un equilibrio excepcional entre ligereza y precisión. Demuestra una capacidad de comprensión gramatical superior a modelos de 1B, siendo la opción recomendada para un uso general en movilidad.
+* **Mistral 7B v0.3 (Mistral AI):** Es el modelo más potente incluido. Ofrece traducciones mucho más naturales y ricas en contexto, aunque se recomienda su uso principalmente en Mac o dispositivos con amplia memoria RAM debido a su mayor exigencia técnica.
+
+> [!IMPORTANT]
+> Todos los modelos están cuantizados a **4 bits**, lo que permite reducir el uso de memoria RAM en más de un 70% sin sacrificar la calidad necesaria para tareas de traducción profesional.
+
+---
+
+*Este proyecto es un ejemplo educativo. Se recomienda el uso de modelos de 1B o 1.5B para dispositivos iOS con limitaciones de RAM.*
