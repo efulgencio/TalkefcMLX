@@ -49,15 +49,15 @@ Sigue estos pasos para configurar el proyecto en tu entorno de desarrollo:
 2.  **Añade las dependencias**
 3.  **Añade las clases que están incluidas en este repositorio** ContentView.swift, TranslaterManager.swift, SpeechManager.swift.
 
-   ![Captura de pantalla de la aplicación TalkefcMLX](SupportedDestinations.png)
-
-
 ---
 
 ## Plataformas soportadas
 
 * **iOS / iPhone:** Optimizado para dispositivos con chip A15 Bionic o superior.
 * **Mac:** Compatible con cualquier equipo con procesador Apple Silicon (M1, M2, M3).
+
+   ![Captura de pantalla de la aplicación TalkefcMLX](SupportedDestinations.png)
+
 
 ---
 
