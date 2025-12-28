@@ -1,4 +1,4 @@
-# TalkefcMLX: Traductor IA Local con MLX Swift
+# Traductor IA Local con MLX Swift
 
 Ejemplo de implementación de **MLX de Apple** para la inferencia local de Modelos de Lenguaje (LLMs) en dispositivos con Apple Silicon.
 
