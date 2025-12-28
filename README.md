@@ -57,6 +57,7 @@ La lógica de negocio reside en el **TraductorManager**:
 * **Carga de Modelos:** Capacidad para alternar entre tres configuraciones (Llama 3.2 1B, Qwen 1.5B y Mistral 7B) mediante parámetros dinámicos.
 * **Ingeniería de Prompts:** Implementa un sistema de roles (*System Prompts*) que instruye al modelo para actuar como un traductor estricto, eliminando respuestas conversacionales innecesarias.
 * **Inferencia:** Realiza la generación de texto de forma asíncrona, actualizando la interfaz mediante streaming de tokens para una respuesta instantánea.
+* Optimización de Inferencia: Para modelos de baja escala (1B-2B), se implementa una técnica de Few-Shot Prompting y se ajusta la temperature a 0.1 para evitar alucinaciones y asegurar que el modelo se mantenga en la tarea de traducción sin derivar en completado de texto conversacional.
 
 ---
 *Este proyecto es un ejemplo educativo. Pendiente de completar información sobre optimización de pesos específicos.*
