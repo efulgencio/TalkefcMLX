@@ -1,7 +1,6 @@
-# TalkefcMLX
-Ejemplo uso de MLX de Apple
-
 # TalkefcMLX: Traductor IA Local con MLX Swift
+
+Ejemplo uso de MLX de Apple
 
 Este proyecto es una implementación de referencia técnica diseñada para desarrolladores interesados en el despliegue de modelos de lenguaje (LLMs) de forma nativa en el ecosistema Apple utilizando el framework **MLX**. Sirve como ejemplo práctico de cómo integrar IA generativa local con una interfaz fluida en SwiftUI.
 
