@@ -1,4 +1,4 @@
-# Traductor IA Local con MLX Swift
+### Traductor IA Local con MLX Swift
 
 Ejemplo de implementación de **MLX de Apple** para la inferencia local de Modelos de Lenguaje (LLMs) en dispositivos con Apple Silicon.
 
@@ -6,9 +6,9 @@ Ejemplo de implementación de **MLX de Apple** para la inferencia local de Model
 
 Este proyecto es una referencia técnica diseñada para desarrolladores interesados en el despliegue de IA generativa de forma nativa. Demuestra cómo integrar modelos locales con una interfaz fluida en SwiftUI y un sistema de síntesis de voz optimizado para evitar bloqueos y warnings de concurrencia.
 
----
 
-## Índice
+
+#### Índice
 
 1. [Objetivo](#objetivo)
 2. [¿Qué es MLX y ventajas?](#qué-es-mlx-y-ventajas)
@@ -21,13 +21,13 @@ Este proyecto es una referencia técnica diseñada para desarrolladores interesa
     * [Translate (Inferencia de IA)](#translate)
 7. [Información adicional](#información-adicional)
 
----
 
-## Objetivo
+
+### Objetivo
 
 El propósito es proporcionar una base funcional sobre el uso de **MLX Swift**, demostrando la carga de modelos cuantizados (4-bit), la gestión de memoria unificada y un flujo de traducción con salida de voz (TTS) que cumple con los estándares de seguridad de hilos de **Swift 6**.
 
-## ¿Qué es MLX y ventajas?
+#### ¿Qué es MLX y ventajas?
 
 **MLX** es un framework de arrays diseñado por Apple para la investigación de aprendizaje automático en chips **Apple Silicon**.
 
@@ -36,7 +36,7 @@ El propósito es proporcionar una base funcional sobre el uso de **MLX Swift**, 
 * **Sin Costes de API:** Ejecución gratuita sin suscripciones externas ni pagos por tokens.
 * **Latencia:** Inferencia inmediata sin dependencia de conexión a internet.
 
-## Instalación
+### Instalación
 
 Sigue estos pasos para configurar el entorno:
 
@@ -47,14 +47,14 @@ Sigue estos pasos para configurar el entorno:
     * `TranslaterManager.swift`
     * `SpeechManager.swift`
 
-## Plataformas soportadas
+### Plataformas soportadas
 
 * **iOS / iPhone:** Optimizado para dispositivos con chip A15 Bionic o superior.
 * **Mac:** Compatible con cualquier equipo con procesador Apple Silicon (M1, M2, M3).
 
 ![Destinos soportados en Xcode](SupportedDestinations.png)
 
-## Dependencias (Packages)
+### Dependencias (Packages)
 
 Importar mediante Swift Package Manager (SPM):
 
@@ -63,11 +63,11 @@ Importar mediante Swift Package Manager (SPM):
 * **MLX Swift:** `https://github.com/ml-explore/mlx-swift`
 * **MLX Swift Chat:** `https://github.com/ml-explore/mlx-swift-chat`
 
-### Información de las Dependencias
+#### Información de las Dependencias
 
 El ecosistema de MLX para Swift se divide principalmente en dos componentes: el motor de cálculo y las implementaciones específicas para modelos de lenguaje.
 
-#### 1. MLX Swift (`ml-explore/mlx-swift`)
+##### 1. MLX Swift (`ml-explore/mlx-swift`)
 Es el **framework principal** y la base de todo el ecosistema. Proporciona la interfaz de Swift para MLX, el motor de aprendizaje automático de Apple diseñado específicamente para chips **Apple Silicon** (series M1, M2, M3 y A15 o superiores).
 
 * **Computación de Arrays:** Similar a NumPy pero optimizado para Metal.
@@ -75,7 +75,7 @@ Es el **framework principal** y la base de todo el ecosistema. Proporciona la in
 * **Evaluación Perezosa (Lazy Evaluation):** Las operaciones solo se ejecutan cuando el resultado es estrictamente necesario, permitiendo que el framework optimice el grafo de computación en tiempo real.
 * **Composición:** Incluye submódulos como `MLXNN` (para redes neuronales) y `MLXOptimizers` (para entrenamiento y ajuste fino).
 
-#### 2. MLX Swift Chat / LM (`ml-explore/mlx-swift-lm`)
+##### 2. MLX Swift Chat / LM (`ml-explore/mlx-swift-lm`)
 Aunque el repositorio de chat suele encontrarse en ejemplos, el componente técnico real que gestiona la inteligencia se denomina actualmente **MLX Swift LM**. Es la librería de alto nivel que permite "hablar" con los modelos.
 
 * **Soporte de Modelos:** Proporciona las arquitecturas listas para usar de modelos populares como **Llama 3.2, Qwen 2.5 y Mistral**, que son los que utilizas en este proyecto.
@@ -83,32 +83,32 @@ Aunque el repositorio de chat suele encontrarse en ejemplos, el componente técn
 * **Generación por Streaming:** Permite la salida de texto palabra por palabra, lo que es vital para una buena experiencia de usuario (UX) en aplicaciones de chat o traducción.
 * **Modelos de Visión (VLM):** En versiones recientes, también permite procesar imágenes junto con texto (multimodalidad).
 
----
 
-### ¿Cómo interactúan en tu proyecto?
+
+#### ¿Cómo interactúan en tu proyecto?
 En tu aplicación de traducción, el flujo funciona así:
 1. **MLX Swift** gestiona el uso eficiente de la RAM y los núcleos de la GPU de tu iPhone/Mac.
 2. **MLX Swift LM** carga el modelo de Hugging Face (como Llama 3.2 1B) y procesa tu texto en español para convertirlo en una traducción al inglés de forma determinista.
 
----
 
-## Estructura del Código
+
+### Estructura del Código
 
 <a name="utilities"></a>
-### Utilities
+#### Utilities
 * **SpeechManager:** Gestiona `AVSpeechSynthesizer` en una `DispatchQueue` serie de fondo para evitar bloqueos en el hilo principal. Utiliza voces de alta calidad `en-GB`.
 
 <a name="view"></a>
-### View
+#### View
 * **SwiftUI:** Interfaz reactiva con estados `isLoading` e `isDownloading` para gestionar el feedback visual durante la carga de pesos y la generación de texto.
 
 <a name="translate"></a>
-### Translate
+#### Translate
 * **TranslaterManager:** Lógica de inferencia con **Prompt Engineering** (System Prompts y Few-Shot) y configuración determinista (`temperature: 0.0`) para asegurar traducciones precisas.
 
----
 
-### Información adicional
+
+#### Información adicional
 
 Para la gestión de modelos, el proyecto utiliza un enumerado que apunta a repositorios específicos de la comunidad MLX en Hugging Face. Esto permite alternar fácilmente entre diferentes arquitecturas de LLM:
 
@@ -121,7 +121,7 @@ enum TypeModelOption: String, CaseIterable {
 }
 </code></pre>
 
-### Detalles de los Modelos Soportados
+#### Detalles de los Modelos Soportados
 
 * **Llama 3.2 1B (Meta):** Es el modelo más ligero y veloz. Gracias a su tamaño reducido, genera tokens de forma casi instantánea y consume muy poca batería, siendo la opción ideal para iPhones con hardware base.
 * **Qwen 2.5 1.5B (Alibaba):** Ofrece un equilibrio excepcional entre ligereza y precisión. Demuestra una capacidad de comprensión gramatical superior a modelos de 1B, siendo la opción recomendada para un uso general en movilidad.
@@ -130,6 +130,6 @@ enum TypeModelOption: String, CaseIterable {
 > [!IMPORTANT]
 > Todos los modelos están cuantizados a **4 bits**, lo que permite reducir el uso de memoria RAM en más de un 70% sin sacrificar la calidad necesaria para tareas de traducción profesional.
 
----
+
 
 *Este proyecto es un ejemplo educativo. Se recomienda el uso de modelos de 1B o 1.5B para dispositivos iOS con limitaciones de RAM.*
