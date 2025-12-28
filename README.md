@@ -45,13 +45,12 @@ El propósito es proporcionar una base funcional sobre el uso de **MLX Swift**, 
 
 Sigue estos pasos para configurar el proyecto en tu entorno de desarrollo:
 
-1.  **Clonar el repositorio:**
-    ```bash
-    git clone [https://github.com/tu-usuario/nombre-del-repo.git](https://github.com/tu-usuario/nombre-del-repo.git)
-    ```
-2.  **Abrir en Xcode:** Localiza el archivo `.xcodeproj` o abre la carpeta directamente en Xcode 16+.
-3.  **Resolución de Dependencias:** Xcode descargará automáticamente los paquetes de MLX Swift mediante Swift Package Manager (SPM).
-4.  **Configuración de Firmado:** En la pestaña *Signing & Capabilities*, selecciona tu equipo de desarrollo para poder ejecutar la app en un dispositivo físico.
+1.  **Crea el proyecto** (Cómo supported destination además de iPhone tambíen incluye Mac)
+2.  **Añade las dependencias**
+3.  **Añade las clases que están incluidas en este repositorio**
+
+   ![Captura de pantalla de la aplicación TalkefcMLX](SupportedDestinations.png)
+
 
 ---
 
