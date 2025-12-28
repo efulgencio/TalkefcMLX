@@ -2,7 +2,7 @@
 
 Ejemplo de implementación de **MLX de Apple** para la inferencia local de Modelos de Lenguaje (LLMs) en dispositivos con Apple Silicon.
 
-![Captura de pantalla de la aplicación TalkefcMLX](ScreenShoot.png)
+<img src="ScreenShoot.png" alt="Captura de pantalla de la aplicación TalkefcMLX" width="60%">
 
 Este proyecto es una referencia técnica diseñada para desarrolladores interesados en el despliegue de IA generativa de forma nativa. Demuestra cómo integrar modelos locales con una interfaz fluida en SwiftUI y un sistema de síntesis de voz optimizado para evitar bloqueos y warnings de concurrencia.
 
