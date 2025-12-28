@@ -63,6 +63,33 @@ Importar mediante Swift Package Manager (SPM):
 * **MLX Swift:** `https://github.com/ml-explore/mlx-swift`
 * **MLX Swift Chat:** `https://github.com/ml-explore/mlx-swift-chat`
 
+### Información de las Dependencias
+
+El ecosistema de MLX para Swift se divide principalmente en dos componentes: el motor de cálculo y las implementaciones específicas para modelos de lenguaje.
+
+#### 1. MLX Swift (`ml-explore/mlx-swift`)
+Es el **framework principal** y la base de todo el ecosistema. Proporciona la interfaz de Swift para MLX, el motor de aprendizaje automático de Apple diseñado específicamente para chips **Apple Silicon** (series M1, M2, M3 y A15 o superiores).
+
+* **Computación de Arrays:** Similar a NumPy pero optimizado para Metal.
+* **Memoria Unificada:** Su mayor ventaja competitiva. Permite que la CPU y la GPU compartan el mismo espacio de memoria, eliminando las costosas copias de datos entre procesadores, lo que reduce drásticamente la latencia.
+* **Evaluación Perezosa (Lazy Evaluation):** Las operaciones solo se ejecutan cuando el resultado es estrictamente necesario, permitiendo que el framework optimice el grafo de computación en tiempo real.
+* **Composición:** Incluye submódulos como `MLXNN` (para redes neuronales) y `MLXOptimizers` (para entrenamiento y ajuste fino).
+
+#### 2. MLX Swift Chat / LM (`ml-explore/mlx-swift-lm`)
+Aunque el repositorio de chat suele encontrarse en ejemplos, el componente técnico real que gestiona la inteligencia se denomina actualmente **MLX Swift LM**. Es la librería de alto nivel que permite "hablar" con los modelos.
+
+* **Soporte de Modelos:** Proporciona las arquitecturas listas para usar de modelos populares como **Llama 3.2, Qwen 2.5 y Mistral**, que son los que utilizas en este proyecto.
+* **Tokenización:** Incluye herramientas para convertir el texto humano en "tokens" que la IA puede procesar y viceversa.
+* **Generación por Streaming:** Permite la salida de texto palabra por palabra, lo que es vital para una buena experiencia de usuario (UX) en aplicaciones de chat o traducción.
+* **Modelos de Visión (VLM):** En versiones recientes, también permite procesar imágenes junto con texto (multimodalidad).
+
+---
+
+### ¿Cómo interactúan en tu proyecto?
+En tu aplicación de traducción, el flujo funciona así:
+1. **MLX Swift** gestiona el uso eficiente de la RAM y los núcleos de la GPU de tu iPhone/Mac.
+2. **MLX Swift LM** carga el modelo de Hugging Face (como Llama 3.2 1B) y procesa tu texto en español para convertirlo en una traducción al inglés de forma determinista.
+
 ---
 
 ## Estructura del Código
